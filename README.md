@@ -1,5 +1,9 @@
 # SolarWinds---Sample-Java-App-Instrumentation-
 
+# Easy Setup --> Pull and Run this Docker Image with SolarWinds APM already instrumented. Modify the servicekey as needed. 
+docker run -d --name kk8300 -p 8780:8780 -p 8783:8783 soultechie/solarwinds-apm
+
+
 # **Java App in Docker Instrumentation**
 
 ### Install Docker on Ubuntu
