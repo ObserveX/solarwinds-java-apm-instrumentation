@@ -1,4 +1,4 @@
-# SolarWinds---Sample-Java-App-Instrumentation-
+# SolarWinds--Konakart-Java-App-Instrumentation-
 
 Approach used for Instrumentation:   
 [A] Manual Setup(Not recommended in Prod)  
