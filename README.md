@@ -101,6 +101,10 @@ RUN sed -i 's|^JAVA_OPTS=.*|JAVA_OPTS="-javaagent:/opt/solarwinds-apm-agent.jar 
 #CMD ["/usr/local/konakart/bin/startkonakart.sh", "run"]
 
 ```
+Note: It is not recommended to keep sensitive information such as service keys, API keys, or passwords in a Dockerfile or any source code file. Instead, you can use environment variables or Docker secrets to securely pass sensitive information to your containers.
+
+To use environment variables, you can either set them in your docker-compose.yml file or pass them when running the docker run command.  
+
 2) Build your custom Docker image:
 ```
 docker build -t custom_konakart .
