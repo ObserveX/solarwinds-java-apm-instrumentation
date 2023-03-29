@@ -1,5 +1,9 @@
 # SolarWinds---Sample-Java-App-Instrumentation-
 
+Approches used for Instrumentation: 
+1) Manual Setup(Not recommended in Prod)
+2) Using Dockerfile to include SolarWinds Instrumentation steps(Recommended method)
+
 # Easy Setup 
 ## Pull and Run this Docker Image with SolarWinds APM already instrumented. Modify the servicekey as needed. 
 docker run -d --name kk8300 -p 8780:8780 -p 8783:8783 soultechie/solarwinds-apm
@@ -51,7 +55,8 @@ docker run -d --name kk8300 -p 8780:8780 -p 8783:8783 soultechie/solarwinds-apm
     ```
     sudo systemctl status docker
     ```
-    
+
+## Manual Setup(Not recommended in Prod)
 
 ### Pull and run the Konakart Community Edition with below docker command:
 
@@ -115,8 +120,49 @@ docker restart 6828ced931b2
 
 Generate load on application and verify APM data in SolarWinds. 
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ebad0b43-5207-4e84-b8e6-0136aff25f3f/Untitled.png)
+## Using Dockerfile to include SolarWinds Instrumentation steps(Recommended method)
+```
+mkdir konakart_mod
+cd konakart_mod
+```
+### Create a DockerFile
+```
+vim Dockerfile
+```
+```
+# Use the existing Konakart image as the base
+FROM konakart/konakart_9600_ce
 
+# Set the working directory
+WORKDIR /app
+
+# Install curl
+RUN apt-get update && \
+    apt-get install -y curl && \
+    rm -rf /var/lib/apt/lists/*
+
+# Download the SolarWinds APM agent using curl
+RUN curl -sSO https://agent-binaries.cloud.solarwinds.com/apm/java/latest/solarwinds-apm-agent.jar
+
+# Copy the agent to the desired location
+RUN mv solarwinds-apm-agent.jar /opt/solarwinds-apm-agent.jar
+
+
+# Add the JAVA_OPTS line to the catalina.sh file
+RUN sed -i 's|^JAVA_OPTS=.*|JAVA_OPTS="-javaagent:/opt/solarwinds-apm-agent.jar -Dsw.apm.service.key=Ig24VMqJ2IvEgpVjONtg-xjccmPoBuxey7PSBNlY4kbCag28hDJwab1S7MkJgVBRHMAY7-g:konakart_test -Dsw.apm.collector=apm.collector.cloud.solarwinds.com"|' /usr/local/konakart/bin/catalina.sh
+
+# Start Konakart
+#CMD ["/usr/local/konakart/bin/startkonakart.sh", "run"]
+
+```
+Build your custom Docker image:
+```
+docker build -t custom_konakart .
+```
+Run a new container using your custom Docker image:
+```
+docker run -d --name custom_kk9600 -p 8780:8780 -p 8783:8783 custom_konakart
+```
 ### Steps for Enabling RUM(FrontEnd monitoring) via manual injection
 
 1) On SolarWinds —> Add Data —> Website —> Select Real User Monitoring and provide the Name and URL —> Copy the script. 
