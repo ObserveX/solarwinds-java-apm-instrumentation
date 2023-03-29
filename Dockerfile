@@ -16,7 +16,7 @@ RUN curl -sSO https://agent-binaries.cloud.solarwinds.com/apm/java/latest/solarw
 RUN mv solarwinds-apm-agent.jar /opt/solarwinds-apm-agent.jar
 
 # Add the JAVA_OPTS line to the catalina.sh file
-RUN sed -i 's|^JAVA_OPTS=.*|JAVA_OPTS="-javaagent:/opt/solarwinds-apm-agent.jar -Dsw.apm.service.key=Ig24VMqJ2IvEgpVjONtg-xjccmPoBuxey7PSBNlY4kbCag28hDJwab1S7MkJgVBRHMAY7-g:konakart_test -Dsw.apm.collector=apm.collector.cloud.solarwinds.com"|' /usr/local/konakart/bin/catalina.sh
+RUN sed -i 's|^JAVA_OPTS=.*|JAVA_OPTS="-javaagent:/opt/solarwinds-apm-agent.jar -Dsw.apm.service.key=SERVICE KEY HERE -Dsw.apm.collector=apm.collector.cloud.solarwinds.com"|' /usr/local/konakart/bin/catalina.sh
 
 # Start Konakart
 #CMD ["/usr/local/konakart/bin/startkonakart.sh", "run"]
