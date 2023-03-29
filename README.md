@@ -1,10 +1,8 @@
 # SolarWinds---Sample-Java-App-Instrumentation-
 
-Approches used for Instrumentation:   
+Approach used for Instrumentation:   
 [A] Manual Setup(Not recommended in Prod)  
 [B] Using Dockerfile to include SolarWinds Instrumentation steps(Recommended method)
-
-
 
 ## [A] Manual Setup(Not recommended in Prod)
 
