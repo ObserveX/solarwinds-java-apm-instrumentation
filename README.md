@@ -124,7 +124,7 @@ docker run -d --name kk8300 -p 8780:8780 -p 8783:8783 soultechie/solarwinds-apm
 1) On SolarWinds —> Add Data —> Website —> Select Real User Monitoring and provide the Name and URL —> Copy the script. 
 
 ```bash
-<script src="[https://rum-agent.na-01.cloud.solarwinds.com/ra-e-1570705138407104512.js](https://rum-agent.na-01.cloud.solarwinds.com/ra-e-1570705138407104512.js)" async></script>
+<script src="[https://rum-agent.na-01.cloud.solarwinds.com/ra-e-157070514512.js](https://rum-agent.na-01.cloud.solarwinds.com/ra-e-1570104512.js)" async></script>
 ```
 
 2) Use the **`docker exec`**command to start a shell inside the container:
